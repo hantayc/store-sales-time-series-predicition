@@ -62,3 +62,14 @@ print(sarima_model)
 
 ```
 
+As mentioned previously, we use `auto_arima()` function to automatically select and fit the best SARIMAX model parameters by minimizing the Akaike Information Criterion. The AIC is a metric capturing model fit against model complexity. Lower the AIC indicates a model that explains the data well without overfitting `auto_arima()` uses AIC to rank candidate models and pick the one with the smallest AIC. Stepwise search we set to true to start from initial orders `(start_p, start_q, star_P, start_Q)` and after each iteration, we adjust a single parameter one at a time up or down. The stepwise arguemnt continues changing if it lowers the AIC; otherise, it reverts and tried another. This demostrates a greedy approach for finding near optiomal settings. 
+
+After fitting the SARIMA model on the training data, we end with the following p,d,q,m,P,D,Q orders. 
+
+`ARIMA(5,0,3)(0,1,1)[7]` 
+
+The correct interpretation of this is the following for the non-seasonal order `(p,d,q) = (5,0,3)` using the last 5 lagged values and incorporate 3 lagged error terms. The seasonal order is `(P,D,Q) = (0,1,1)` at period 7 captures one seasonal difference and one seasonal MA term to model weekly seasonality. 
+
+After running this model on the test dataset, we observe a RMSE (Root Mean Squared Error) of $238,847. 
+
+![sarima: preds vs actuals](sarima-timeseries.png)
