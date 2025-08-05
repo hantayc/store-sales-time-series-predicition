@@ -80,7 +80,7 @@ We run a SARIMAX model to capture the exogenous signals that is provided from ho
 
 We use walk-forward forecasting where rather than batch-forecast all of 2017, we predict the next 1 timeframe and then update the model with the actuals. This approach prevents look-ahead bias and more faithfully mirrors a production deployment. 
 
-![sarima-plot](sarima-plot.png)
+![sarima-plot](sarimax-plot.png)
 
 #### Intrepretations & Takeaways 
 
