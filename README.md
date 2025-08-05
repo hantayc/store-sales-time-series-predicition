@@ -87,3 +87,5 @@ We use walk-forward forecasting where rather than batch-forecast all of 2017, we
 **Holiday Signal**: The binary holiday flag modestly nudges the forecast downwards on days like New Year's, but most of the forecast's accuracy comes from capturing the regular weekly ups and downs. 
 
 **Weekly Seasonality**: Evan a single seasonal MA term at lag 7 yielded good improvement. Learning that mid-week and weekend sales follow different patterns. 
+
+**Evaluation**: Adding the "X" part in SARIMAX provided value in terms of being able to bring down the RMSE to 158,588.00.
