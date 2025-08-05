@@ -28,7 +28,7 @@ After basic EDA, we observe that there has been systematic growth in sales (stea
 
 We observe the following total monthly sales growth from 2013 to 2017 in the training data as shown below: 
 
-![Total Sale Growth Training Data](image.png)
+![Total Sale Growth Training Data](/images/image.png)
 
 Observing monthly sale data, we assume a seasonality of 12 periods, 12 months per year. Observing that in the beginning of the year we see a decline in total sales, after experiencing a spike typically towards the end of the year. 
 
@@ -72,7 +72,7 @@ The correct interpretation of this is the following for the non-seasonal order `
 
 After running this model on the test dataset, we observe a RMSE (Root Mean Squared Error) of $238,847. 
 
-![sarima: preds vs actuals](sarima-timeseries.png)
+![sarima: preds vs actuals](/images/sarima-timeseries.png)
 
 ## SARIMAX 
 
@@ -80,7 +80,7 @@ We run a SARIMAX model to capture the exogenous signals that is provided from ho
 
 We use walk-forward forecasting where rather than batch-forecast all of 2017, we predict the next 1 timeframe and then update the model with the actuals. This approach prevents look-ahead bias and more faithfully mirrors a production deployment. 
 
-![sarima-plot](sarimax-plot.png)
+![sarima-plot](/images/sarimax-plot.png)
 
 #### Intrepretations & Takeaways 
 
