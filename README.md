@@ -73,3 +73,17 @@ The correct interpretation of this is the following for the non-seasonal order `
 After running this model on the test dataset, we observe a RMSE (Root Mean Squared Error) of $238,847. 
 
 ![sarima: preds vs actuals](sarima-timeseries.png)
+
+## SARIMAX 
+
+We run a SARIMAX model to capture the exogenous signals that is provided from holidays dataframe. Again, for a learning excercise we use the automated SARIMAC selection. The result of the SARIMAX `auto_arima` is `ARIMA(5,0,3)(0,1,1)[7] intercept`. We are working with daily data so we set seasonality for 7 periods, making it assume weekly seasonality. We interprete the ARIMA using the same understanding from above. The best fitting SARIMAX model is five lagged sales terms and three lagged errors (non-seasonal). 
+
+We use walk-forward forecasting where rather than batch-forecast all of 2017, we predict the next 1 timeframe and then update the model with the actuals. This approach prevents look-ahead bias and more faithfully mirrors a production deployment. 
+
+![sarima-plot](sarima-plot.png)
+
+#### Intrepretations & Takeaways 
+
+**Holiday Signal**: The binary holiday flag modestly nudges the forecast downwards on days like New Year's, but most of the forecast's accuracy comes from capturing the regular weekly ups and downs. 
+
+**Weekly Seasonality**: Evan a single seasonal MA term at lag 7 yielded good improvement. Learning that mid-week and weekend sales follow different patterns. 
