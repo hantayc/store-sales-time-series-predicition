@@ -20,8 +20,11 @@ This repository contains a personal project for forecasting store-level sales us
 
 5. Evaluation using RMSE, visualization of actuals vs. predictions 
 
-## Repo Structure
+## Data Description 
 
-```
- 
-```
+After basic EDA, we observe that there has been systematic growth in sales (steadily increasing year over year) for specific product families. However, for a learning experiment we do not consider modeling for specific product families due to having to create different models, using the SARIMAX method, for each product families. Further, we consider the high cardinatlity of the product family feature. 
+
+We observe the following total sales growth from 2013 to 2017 in the training data as shown below: 
+
+![alt text](image.png)
+
