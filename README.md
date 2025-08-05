@@ -20,11 +20,45 @@ This repository contains a personal project for forecasting store-level sales us
 
 5. Evaluation using RMSE, visualization of actuals vs. predictions 
 
+# Monthly Total Sales Forecasing with SARIMA
+
 ## Data Description 
 
 After basic EDA, we observe that there has been systematic growth in sales (steadily increasing year over year) for specific product families. However, for a learning experiment we do not consider modeling for specific product families due to having to create different models, using the SARIMAX method, for each product families. Further, we consider the high cardinatlity of the product family feature. 
 
-We observe the following total sales growth from 2013 to 2017 in the training data as shown below: 
+We observe the following total monthly sales growth from 2013 to 2017 in the training data as shown below: 
 
-![alt text](image.png)
+![Total Sale Growth Training Data](image.png)
+
+Observing monthly sale data, we assume a seasonality of 12 periods, 12 months per year. Observing that in the beginning of the year we see a decline in total sales, after experiencing a spike typically towards the end of the year. 
+
+## Model Build 
+
+For this learning project, we use the **auto_arima()** function provided by the pmdarima package. 
+
+I start with trimming the 2017 year from train_df, because after observing test_df csv file from the Kaggle data, I see that there are no total sales available as a feature in that file. Thus, we would need to leverage the training data set to predict n periods. For the purpose of this project, we use 2013 to 2016 values to predict total sales monetary value for 1/1/2017 through 7/1/2027. We exclude 08/1/2017 because after observing the data, we assume that the sale volume indicates that it's not a full complete month's worth of data. 
+
+Code used to implement SARIMA model. 
+
+```
+warnings.simplefilter('ignore', FutureWarning)
+
+sarima_model = auto_arima(
+    train_subset['total_sales'],
+    seasonal=True,
+    m=7,
+    start_p=1, start_q=1,
+    max_p=5, max_q=5,           
+    start_P=0, start_Q=0,
+    max_P=1, max_Q=1,           # seasonal ar/ma orderes
+    D=1,                        # seasonal difference 
+    stepwise=True,              # stepwise algo 
+    trace=True,
+    error_action='ignore',
+    suppress_warnings=True
+)
+
+print(sarima_model)
+
+```
 
